@@ -1,10 +1,16 @@
-from django.contrib import admin
+from wagtail.contrib.modeladmin.options import (
+    ModelAdmin,
+    modeladmin_register,
+)
 
 from .models import WebMentionResponse
 
 
-class WebMentionResponseAdmin(admin.ModelAdmin):
+class WebMentionResponseAdmin(ModelAdmin):
     model = WebMentionResponse
+
+    menu_label = "Webmention"
+    menu_icon = "placeholder"
 
     fields = [
         ("source_for_admin", "response_to_for_admin"),
