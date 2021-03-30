@@ -45,4 +45,5 @@ class WebMentionResponseAdmin(ModelAdmin):
     date_hierarchy = "date_modified"
 
 
-admin.site.register(WebMentionResponse, WebMentionResponseAdmin)
+modeladmin_register( WebMentionResponseAdmin)
+
