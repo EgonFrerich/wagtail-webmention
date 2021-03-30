@@ -9,11 +9,19 @@ Once you receive a webmention, you can click through to the page the webmention 
 
 Once you verify that you're receiving webmentions successfully, you can use the webmention information as you like. As an example, you could query the webmentions that are responses to a specific page and display them on that page.
 
-## What this project isn't
+## Senden von webmention
 
-This package does not currently provide functionality for [sending webmentions](https://www.w3.org/TR/webmention/#sending-webmentions).
+Das Senden ist  ebenfalls vorgesehen. Muß aber speziell eingerichtet werden.
 
 ## Installation
+
+* Kopiere das Verzeichnis webmention in src wie eine Web-Anwendung in das betreffende Projekt
+* Füge in settings ein
+     *  'webmention' zu INSTALLED_APPS
+     *  'wagtail.contrib.modeladmin' zu INSTALLED_APPS
+     *  'webmention.middleware.webmention_middleware' zu MIDDLEWARE
+* Add the URL patterns to your top-level `urls.py`
+    * `path('webmention/', include('webmention.urls'))`
 
 
 
