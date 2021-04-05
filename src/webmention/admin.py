@@ -3,14 +3,11 @@ from wagtail.contrib.modeladmin.options import (
     modeladmin_register,
 )
 
-from .models import WebMentionResponse
+from .models import WebMentionResponse, OutgoingWebmentionStatus
 
 
 class WebMentionResponseAdmin(ModelAdmin):
     model = WebMentionResponse
-
-    menu_label = "Webmention"
-    menu_icon = "placeholder"
 
     fields = [
         ("source_for_admin", "response_to_for_admin"),
@@ -46,4 +43,25 @@ class WebMentionResponseAdmin(ModelAdmin):
 
 
 modeladmin_register( WebMentionResponseAdmin)
+
+class OutgoingWebmentionStatusAdmin(ModelAdmin):
+    model = OutgoingWebmentionStatus
+    readonly_fields = [
+        'created_at',
+        'source_url',
+        'target_url',
+        'target_webmention_endpoint',
+        'status_message',
+        'response_code',
+        'successful',
+    ]
+    list_display = [
+        'source_url',
+        'target_url',
+        'successful',
+        'created_at',
+    ]
+    date_hierarchy = 'created_at'
+
+modeladmin_register( OutgoingWebmentionStatusAdmin)
 
