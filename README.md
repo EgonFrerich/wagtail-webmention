@@ -11,7 +11,11 @@ Once you verify that you're receiving webmentions successfully, you can use the 
 
 ## Senden von webmention
 
-Das Senden ist  ebenfalls vorgesehen. Muß aber speziell eingerichtet werden.
+Für das Senden wird auf Teile von https://github.com/beatonma/django-wm zurückgegriffen. 
+
+Nicht enthalten ist das Senden einer webmention, wenn der Hinweis auf eine URL entfernt wird oder ein Beitrag mit einem Hinweis auf eine URL gelöscht wird.
+
+Gesendet wird sofort mit der Veröffentlichung einer Seite; die Pufferung mit Celery ist von django-wm nicht übernommen.
 
 ## Installation
 
@@ -20,8 +24,30 @@ Das Senden ist  ebenfalls vorgesehen. Muß aber speziell eingerichtet werden.
      *  'webmention' zu INSTALLED_APPS
      *  'wagtail.contrib.modeladmin' zu INSTALLED_APPS
      *  'webmention.middleware.webmention_middleware' zu MIDDLEWARE
+     *  'APPEND_SLASH=False'
 * Add the URL patterns to your top-level `urls.py`
     * `path('webmention/', include('webmention.urls'))`
+
+Es ist eine logging-Funktion eingebaut (siehe outgoing_webmentions.py), die über den Ablauf informiert. Ggf. ist settings hierfür zu ergänzen, der Logger hat den Namen 'django'.
+
+Zum Auffinden der Links in den auszuwertenden Texten wird das Paket beautifulsoup4 benötigt.
+
+## Anwendung
+
+Im Modell für die Page, für die webmention zu bearbeiten sind, ist zusätzlich MentionableMixin zu erben.
+
+    from webmention.mixins import MentionableMixin
+    ...
+    class MeinePage(MentionableMixin, Page):
+
+Dieses Modell muß die Funktion all_text implementieren, in der die auszuwertenden Inhalte der Seite bereitgestellt werden.
+
+    def all_text(self) -> str:
+            return f'{self.feld1} {self.feld2}'
+
+Die Datenbank ist fortzuschreiben mit makemigrations und migrate.
+
+ 
 
 
 
