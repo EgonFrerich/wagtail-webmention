@@ -47,7 +47,8 @@ Dieses Modell muß die Funktion all_text implementieren, in der die auszuwertend
 
 Die Datenbank ist fortzuschreiben mit makemigrations und migrate.
 
- 
+## Hinweis
+Z.Zt. sind view.py und resolution.py noch aus geforkten Repositories noch enthalten, sie werden aber anscheinend nicht benötigt. 
 
 
 
