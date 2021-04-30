@@ -4,7 +4,7 @@ from wagtail.core.signals import page_published
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
-from webmention import process_outgoing_webmentions
+from webmention.outgoing_webmentions import process_outgoing_webmentions
 
 
 log = logging.getLogger('django')
