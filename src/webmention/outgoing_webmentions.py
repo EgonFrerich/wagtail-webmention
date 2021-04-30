@@ -12,7 +12,6 @@ from django.conf import settings
 import requests
 
 from bs4 import BeautifulSoup
-#from celery import shared_task
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 
@@ -43,7 +42,6 @@ def _save_status(
     outgoing_status.save()
 
 
-#@shared_task
 def process_outgoing_webmentions(source_url: str, text: str) -> int:
     """
     Find links and send webmentions if remote server accepts them.
