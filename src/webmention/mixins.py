@@ -4,11 +4,10 @@ from wagtail.core.signals import page_published
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
-#from mentions.models.webmention import Webmention
-from webmention.tasks import process_outgoing_webmentions
-#from mentions.util import serialize_mentions
+from webmention import process_outgoing_webmentions
 
-log = logging.getLogger(__name__)
+
+log = logging.getLogger('django')
 
 
 class MentionableMixin(models.Model):
